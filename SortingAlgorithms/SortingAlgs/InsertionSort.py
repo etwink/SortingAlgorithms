@@ -4,8 +4,8 @@ import tkinter as tk
 from time import sleep
 
 class InsertionSort(AbstractSort):
-    def __init__(self, gui, timeStep, l):
-        super().__init__(gui, timeStep, l)
+    def __init__(self, gui, timeStep, l, myPlot):
+        super().__init__(gui, timeStep, l, myPlot)
         self.i = 1
 
     def insertionSort(self):
@@ -16,8 +16,10 @@ class InsertionSort(AbstractSort):
                 self.l[j+1] = self.l[j]
                 j -= 1
                 self.updateGUI()
+                self.myPlot.update(self.l)
             self.l[j+1]=key
             if self.kill:
                     self.i = i
                     return
         self.kill = True
+        
