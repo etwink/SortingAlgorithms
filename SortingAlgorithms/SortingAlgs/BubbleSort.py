@@ -1,11 +1,12 @@
+from HelperFunctions.plotterHelper import myPlot
 from SortingAlgs.AbstractSort import AbstractSort
 
 import tkinter as tk
 from time import sleep
 
 class BubbleSort(AbstractSort):
-    def __init__(self, gui, timeStep, l):
-        super().__init__(gui, timeStep, l)
+    def __init__(self, gui, timeStep, l, myPlot):
+        super().__init__(gui, timeStep, l, myPlot)
         self.i = 0
 
     def bubbleSort(self):
@@ -16,8 +17,10 @@ class BubbleSort(AbstractSort):
                     self.l[j+1] = self.l[j]
                     self.l[j] = copy
                     self.updateGUI()
+                    self.myPlot.update(self.l)
                 if self.kill:
                     self.i = i
                     return
         self.kill = True
+
 

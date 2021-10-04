@@ -4,8 +4,8 @@ import tkinter as tk
 from time import sleep
 
 class SelectionSort(AbstractSort):
-    def __init__(self, gui, timeStep, l):
-        super().__init__(gui, timeStep, l)
+    def __init__(self, gui, timeStep, l, myPlot):
+        super().__init__(gui, timeStep, l, myPlot)
         self.i = 0
 
     def selectionSort(self):
@@ -18,7 +18,10 @@ class SelectionSort(AbstractSort):
             self.l[min] = self.l[i]
             self.l[i] = copy
             self.updateGUI()
+            self.myPlot.update(self.l)
             if self.kill:
                     self.i = i
                     return
         self.kill = True
+
+

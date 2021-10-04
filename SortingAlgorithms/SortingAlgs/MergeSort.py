@@ -4,8 +4,8 @@ import tkinter as tk
 from time import sleep
 
 class MergeSort(AbstractSort):
-    def __init__(self, gui, timeStep, l):
-        super().__init__(gui, timeStep, l)
+    def __init__(self, gui, timeStep, l, myPlot):
+        super().__init__(gui, timeStep, l, myPlot)
         self.dummyList = l.copy()
 
     def updateGUI(self, l, low, high):
@@ -15,9 +15,12 @@ class MergeSort(AbstractSort):
         dummyText.append(self.dummyList[:low])
         dummyText.append(self.dummyList[low:high])
         dummyText.append(self.dummyList[high:])
-        self.gui.listText.set(dummyText)
+        if len(self.l) <= 150:
+            self.gui.listText.set(dummyText)
+            sleep(self.timeStep)
         self.gui.root.update()
-        sleep(self.timeStep)
+        self.myPlot.update(self.dummyList)
+        
 
     #def mergeSort(self, l):
     def mergeSort(self, l, low, high):
@@ -27,8 +30,8 @@ class MergeSort(AbstractSort):
             R = l[mid:]
             #self.mergeSort(L)
             #self.mergeSort(R)
-            self.mergeSort(L, low, mid)
-            self.mergeSort(R, mid, high)
+            self.mergeSort(L, low, low+mid)
+            self.mergeSort(R, low+mid, high)
             if self.kill:
                 return
             i = j = k = 0
@@ -43,29 +46,33 @@ class MergeSort(AbstractSort):
                 k += 1
                 if len(l) == len(self.l):
                     super().updateGUI()
+                    self.myPlot.update(self.dummyList)
                 else:
                     self.updateGUI(l, low, high)
                 if self.kill:
                     return
             while i < len(L):
                 l[k] = L[i]
-                self.dummyList[low+k] = l[k]
+                self.dummyList[low+k] = L[i]
                 i += 1
                 k += 1
                 if len(l) == len(self.l):
                     super().updateGUI()
+                    self.myPlot.update(self.dummyList)
                 else:
                     self.updateGUI(l, low, high)
                 if self.kill:
                     return
             while j < len(R):
                 l[k]=R[j]
-                self.dummyList[low+k] = l[k]
+                self.dummyList[low+k] = R[j]
                 j += 1
                 k += 1
                 if len(l) == len(self.l):
                     super().updateGUI()
+                    self.myPlot.update(self.dummyList)
                 else:
                     self.updateGUI(l, low, high)
                 if self.kill:
                     return
+                    

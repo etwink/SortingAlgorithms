@@ -4,8 +4,8 @@ import tkinter as tk
 from time import sleep
 
 class RadixSort(AbstractSort):
-    def __init__(self, gui, timeStep, l):
-        super().__init__(gui, timeStep, l)
+    def __init__(self, gui, timeStep, l, myPlot):
+        super().__init__(gui, timeStep, l, myPlot)
 
     def countingSort(self, l, exp1):
         n = len(l)
@@ -33,6 +33,7 @@ class RadixSort(AbstractSort):
             count[index%10] -= 1
             i -= 1
             self.updateGUI()
+            self.myPlot.update(self.l)
 
         i = 0
         for i in range(0, len(l)):
@@ -40,6 +41,7 @@ class RadixSort(AbstractSort):
                 return
             l[i] = output[i]
             self.updateGUI()
+            self.myPlot.update(self.l)
         
     def radixSort(self, l):
         max1 = max(l)
@@ -49,3 +51,4 @@ class RadixSort(AbstractSort):
                 return
             self.countingSort(l, exp)
             exp *= 10
+
