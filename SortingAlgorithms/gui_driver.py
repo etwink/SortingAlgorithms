@@ -8,6 +8,7 @@ from SortingAlgs.RadixSort import RadixSort
 
 from HelperFunctions.CreateList import createList
 from HelperFunctions.ListShuffle import ListShuffle
+from HelperFunctions.reverseList import reverseList
 from HelperFunctions.correctnessCheck import correctnessCheck
 from HelperFunctions.plotterHelper import myPlot
 
@@ -52,6 +53,18 @@ class GUI_Driver:
             self.list = createList(s)
             self.listText.set(self.list) 
             self.myPlot.changeDimensions(self.list)
+            self.myPlot.update(self.list)
+            del self.currentSort
+            self.currentSort = AbstractSort
+            checkClick()
+            actionText.set("Idle...")
+
+        def reversedListClick():
+            stopClick()
+            actionText.set("Creating a new list...")
+            self.list = reverseList(int(listSizeEntry.get()))
+            self.listText.set(self.list)
+            self.myPlot.changeDimensions(self.list) 
             self.myPlot.update(self.list)
             del self.currentSort
             self.currentSort = AbstractSort
@@ -159,6 +172,7 @@ class GUI_Driver:
         listSizeEntry = tk.Entry(self.root)
         listSizeEntry.insert(0, '100')
         changeSizeButton = tk.Button(self.root, text="Change Size of List", command=changeListClick)
+        reversedListButton = tk.Button(self.root, text="Create a Backwards List", command=reversedListClick)
         speedSlider = tk.Scale(self.root, from_=0, to=100, length=500, orient=HORIZONTAL)
 
         bubbleButton = tk.Button(self.root, text="Bubble", command=bubbleClick)
@@ -177,6 +191,7 @@ class GUI_Driver:
         checkButton.pack()
         listSizeEntry.pack()
         changeSizeButton.pack()
+        reversedListButton.pack()
         speedSlider.pack()
 
         bubbleButton.pack()
