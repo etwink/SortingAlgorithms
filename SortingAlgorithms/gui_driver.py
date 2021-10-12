@@ -5,6 +5,7 @@ from SortingAlgs.InsertionSort import InsertionSort
 from SortingAlgs.MergeSort import MergeSort
 from SortingAlgs.QuickSort import QuickSort
 from SortingAlgs.RadixSort import RadixSort
+from SortingAlgs.HeapSort import HeapSort
 
 from HelperFunctions.CreateList import createList
 from HelperFunctions.ListShuffle import ListShuffle
@@ -155,6 +156,18 @@ class GUI_Driver:
             checkClick() 
             actionText.set("Idle...") 
 
+        def heapClick(): #button that is used to start a radix sort
+            stopClick()
+            actionText.set("Heap Sorting...") 
+            if not isinstance(self.currentSort, HeapSort): 
+                self.currentSort = HeapSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+            self.currentSort.timeStep = speedSlider.get() / float(1000) 
+            if not correctnessCheck(self.list): 
+                self.currentSort.kill=False
+                self.currentSort.heapSort(self.list)
+            checkClick() 
+            actionText.set("Idle...") 
+
         self.myPlot.plot(self.list)
         self.myPlot.show()
 
@@ -181,6 +194,7 @@ class GUI_Driver:
         mergeButton = tk.Button(self.root, text="Merge", command=mergeClick)
         quickButton = tk.Button(self.root, text="Quick", command=quickClick)
         radixButton = tk.Button(self.root, text="Radix", command=radixClick)
+        heapButton = tk.Button(self.root, text="Heap", command=heapClick)
 
         listLabel = tk.Label(self.root, textvariable=self.listText)
         actionLabel = tk.Label(self.root, textvariable=actionText)
@@ -200,6 +214,7 @@ class GUI_Driver:
         mergeButton.pack()
         quickButton.pack()
         radixButton.pack()
+        heapButton.pack()
 
         correctLabel.pack()
         actionLabel.pack()
