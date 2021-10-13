@@ -22,7 +22,7 @@ class GUI_Driver:
     def __init__(self) -> None:
         self.root = tk.Tk()
         self.root.title("Sorting Algorithms")
-        self.root.geometry("1800x400")
+        self.root.geometry("1800x450")
         self.list = createList(100) #create a list --SHOULD UPDATE SO USER CAN SPECIFY HOW MANY LIST ITEMS WITH AN INPUT FIELD OR SLIDER--
         self.myPlot = myPlot()
         self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
