@@ -17,7 +17,7 @@ class AbstractSort:
         if not self.gui:
             return
         if len(self.l) <= 150:
-            self.gui.listText.set(self.l)
+            # self.gui.listText.set(self.l)
             sleep(self.timeStep)
         self.gui.root.update()
         

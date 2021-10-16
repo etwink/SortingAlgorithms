@@ -14,7 +14,7 @@ from HelperFunctions.correctnessCheck import correctnessCheck
 from HelperFunctions.plotterHelper import myPlot
 
 import tkinter as tk
-from tkinter.constants import HORIZONTAL
+from tkinter.constants import BOTTOM, HORIZONTAL, LEFT, TOP
 import matplotlib.pyplot as plt
 
 
@@ -25,7 +25,7 @@ class GUI_Driver:
         self.root.geometry("1800x450")
         self.list = createList(100) #create a list --SHOULD UPDATE SO USER CAN SPECIFY HOW MANY LIST ITEMS WITH AN INPUT FIELD OR SLIDER--
         self.myPlot = myPlot()
-        self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
+        # self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
         self.currentSort = AbstractSort 
         self.currentSort.kill = True 
 
@@ -36,7 +36,7 @@ class GUI_Driver:
             stopClick()
             actionText.set("Shuffling...") 
             ListShuffle(self.list) #shuffling the list
-            self.listText.set(self.list) 
+            # self.listText.set(self.list) 
             self.myPlot.update(self.list)
             correctText.set("Not Sorted Correctly :(") 
             actionText.set("Idle...") 
@@ -45,14 +45,14 @@ class GUI_Driver:
             if not self.currentSort.kill: 
                 actionText.set("Stopping...") 
                 self.currentSort.killSort() #run the killSort definition for the current sorting operation
-                self.listText.set(self.list) 
+                # self.listText.set(self.list) 
 
         def changeListClick():
             stopClick()
             actionText.set("Creating a new list...")
             s = int(listSizeEntry.get())
             self.list = createList(s)
-            self.listText.set(self.list) 
+            # self.listText.set(self.list) 
             self.myPlot.changeDimensions(self.list)
             self.myPlot.update(self.list)
             del self.currentSort
@@ -64,7 +64,7 @@ class GUI_Driver:
             stopClick()
             actionText.set("Creating a new list...")
             self.list = reverseList(int(listSizeEntry.get()))
-            self.listText.set(self.list)
+            # self.listText.set(self.list)
             self.myPlot.changeDimensions(self.list) 
             self.myPlot.update(self.list)
             del self.currentSort
@@ -79,6 +79,14 @@ class GUI_Driver:
             else: #else if the correctnessCheck definition returns false, set the correct text variable to not sorted correctly
                 correctText.set("Not Sorted Correctly :(")
             actionText.set("Idle...") 
+
+        def exitClick():
+            stopClick()
+            actionText.set("Exiting...")
+            plt.close('all')
+            self.root.destroy()
+            print('everything should be closed now...')
+
 
         def bubbleClick(): #button that is used to start a bubblesort
             stopClick()
@@ -177,48 +185,66 @@ class GUI_Driver:
         correctText = tk.StringVar() 
         correctText.set("")
 
-        self.listText.set(self.list) 
+        # self.listText.set(self.list) 
+
+        optionsFrame = tk.Frame(self.root)
+        listFrame = tk.Frame(self.root)
+        nSquaredFrame = tk.Frame(self.root)
+        nLogNFrame = tk.Frame(self.root)
+        labelFrame = tk.Frame(self.root)
+        exitFrame = tk.Frame(self.root)
+
+        optionsFrame.pack()
+        listFrame.pack()
+        nSquaredFrame.pack()
+        nLogNFrame.pack()
+        labelFrame.pack()
+        exitFrame.pack()
         
-        shuffleButton = tk.Button(self.root, text="Shuffle", command=shuffleClick)
-        stopButton = tk.Button(self.root, text="Stop", command=stopClick)
-        checkButton = tk.Button(self.root, text="Check Correctness", command=checkClick)
-        listSizeEntry = tk.Entry(self.root)
+        shuffleButton = tk.Button(optionsFrame, text="Shuffle", command=shuffleClick)
+        stopButton = tk.Button(optionsFrame, text="Stop", command=stopClick)
+        checkButton = tk.Button(optionsFrame, text="Check Correctness", command=checkClick)
+        listSizeEntry = tk.Entry(listFrame)
         listSizeEntry.insert(0, '100')
-        changeSizeButton = tk.Button(self.root, text="Change Size of List", command=changeListClick)
-        reversedListButton = tk.Button(self.root, text="Create a Backwards List", command=reversedListClick)
-        speedSlider = tk.Scale(self.root, from_=0, to=100, length=500, orient=HORIZONTAL)
+        changeSizeButton = tk.Button(listFrame, text="Change Size of List", command=changeListClick)
+        reversedListButton = tk.Button(listFrame, text="Create a Backwards List", command=reversedListClick)
+        speedSlider = tk.Scale(listFrame, from_=0, to=100, length=500, orient=HORIZONTAL)
 
-        bubbleButton = tk.Button(self.root, text="Bubble", command=bubbleClick)
-        selectionButton = tk.Button(self.root, text="Selection", command=selectionClick)
-        insertionButton = tk.Button(self.root, text="Insertion", command=insertionClick)
-        mergeButton = tk.Button(self.root, text="Merge", command=mergeClick)
-        quickButton = tk.Button(self.root, text="Quick", command=quickClick)
-        radixButton = tk.Button(self.root, text="Radix", command=radixClick)
-        heapButton = tk.Button(self.root, text="Heap", command=heapClick)
+        bubbleButton = tk.Button(nSquaredFrame, text="Bubble", command=bubbleClick)
+        selectionButton = tk.Button(nSquaredFrame, text="Selection", command=selectionClick)
+        insertionButton = tk.Button(nSquaredFrame, text="Insertion", command=insertionClick)
+        mergeButton = tk.Button(nLogNFrame, text="Merge", command=mergeClick)
+        quickButton = tk.Button(nLogNFrame, text="Quick", command=quickClick)
+        radixButton = tk.Button(nLogNFrame, text="Radix", command=radixClick)
+        heapButton = tk.Button(nLogNFrame, text="Heap", command=heapClick)
 
-        listLabel = tk.Label(self.root, textvariable=self.listText)
-        actionLabel = tk.Label(self.root, textvariable=actionText)
-        correctLabel = tk.Label(self.root, textvariable=correctText)
+        # listLabel = tk.Label(self.root, textvariable=self.listText)
+        actionLabel = tk.Label(labelFrame, textvariable=actionText)
+        correctLabel = tk.Label(labelFrame, textvariable=correctText)
 
-        shuffleButton.pack()
-        stopButton.pack()
-        checkButton.pack()
-        listSizeEntry.pack()
-        changeSizeButton.pack()
-        reversedListButton.pack()
-        speedSlider.pack()
+        exitButton = tk.Button(exitFrame, text="Exit", command=exitClick)
 
-        bubbleButton.pack()
-        selectionButton.pack()
-        insertionButton.pack()
-        mergeButton.pack()
-        quickButton.pack()
-        radixButton.pack()
-        heapButton.pack()
+        shuffleButton.pack(side=LEFT, padx = 2, pady = 10)
+        stopButton.pack(side=LEFT, padx = 2, pady = 10)
+        checkButton.pack(side=BOTTOM, padx = 2, pady = 10)
+        listSizeEntry.pack(side=TOP, padx = 2, pady = 0)
+        changeSizeButton.pack(side=LEFT, padx = 2, pady = 10)
+        reversedListButton.pack(side=LEFT, padx = 2, pady = 10)
+        # speedSlider.pack(side=BOTTOM)
 
-        correctLabel.pack()
-        actionLabel.pack()
-        listLabel.pack()
+        bubbleButton.pack(side=LEFT, padx = 2, pady = 10)
+        selectionButton.pack(side=LEFT, padx = 2, pady = 10)
+        insertionButton.pack(side=LEFT, padx = 2, pady = 10)
+        mergeButton.pack(side=LEFT, padx = 2, pady = 10)
+        quickButton.pack(side=LEFT, padx = 2, pady = 10)
+        radixButton.pack(side=LEFT, padx = 2, pady = 10)
+        heapButton.pack(side=LEFT, padx = 2, pady = 10)
+
+        correctLabel.pack(side=TOP, padx = 2, pady = 0)
+        actionLabel.pack(side=BOTTOM, padx = 2, pady = 0)
+        # listLabel.pack()
+
+        exitButton.pack()
 
         # canvas = FigureCanvasTkAgg(self.myPlot.fig, master=self.root)
         # canvas.draw()
