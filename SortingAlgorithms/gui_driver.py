@@ -22,7 +22,7 @@ class GUI_Driver:
     def __init__(self) -> None:
         self.root = tk.Tk()
         self.root.title("Sorting Algorithms")
-        self.root.geometry("1800x450")
+        self.root.geometry("600x450")
         self.list = createList(100) #create a list --SHOULD UPDATE SO USER CAN SPECIFY HOW MANY LIST ITEMS WITH AN INPUT FIELD OR SLIDER--
         self.myPlot = myPlot()
         self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
@@ -225,7 +225,7 @@ class GUI_Driver:
         shuffleButton.pack(side=LEFT, padx = 2, pady = 10)
         stopButton.pack(side=LEFT, padx = 2, pady = 10)
         checkButton.pack(side=BOTTOM, padx = 2, pady = 10)
-        listSizeEntry.pack(side=TOP, padx = 2, pady = 0)
+        listSizeEntry.pack(side=TOP, padx = 2, pady = (5,0))
         changeSizeButton.pack(side=LEFT, padx = 2, pady = 10)
         reversedListButton.pack(side=LEFT, padx = 2, pady = 10)
         # speedSlider.pack(side=BOTTOM)
