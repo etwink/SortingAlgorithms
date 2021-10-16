@@ -190,6 +190,7 @@ class GUI_Driver:
         listFrame = tk.Frame(self.root)
         nSquaredFrame = tk.Frame(self.root)
         nLogNFrame = tk.Frame(self.root)
+        oddSortFrame = tk.Frame(self.root)
         labelFrame = tk.Frame(self.root)
         exitFrame = tk.Frame(self.root)
 
@@ -198,6 +199,7 @@ class GUI_Driver:
         listFrame.pack()
         nSquaredFrame.pack()
         nLogNFrame.pack()
+        oddSortFrame.pack()
         labelFrame.pack()
         exitFrame.pack()
         
@@ -215,11 +217,14 @@ class GUI_Driver:
         bubbleButton = tk.Button(nSquaredFrame, text="Bubble", command=bubbleClick)
         selectionButton = tk.Button(nSquaredFrame, text="Selection", command=selectionClick)
         insertionButton = tk.Button(nSquaredFrame, text="Insertion", command=insertionClick)
+
         nLogNText = tk.Label(nLogNFrame, text="O(nLog(n)) Sorting Algorithms:")
         mergeButton = tk.Button(nLogNFrame, text="Merge", command=mergeClick)
         quickButton = tk.Button(nLogNFrame, text="Quick", command=quickClick)
-        radixButton = tk.Button(nLogNFrame, text="Radix", command=radixClick)
         heapButton = tk.Button(nLogNFrame, text="Heap", command=heapClick)
+
+        oddSortText = tk.Label(oddSortFrame, text="Odd Sorting Algorithms:")
+        radixButton = tk.Button(oddSortFrame, text="Radix", command=radixClick)
 
         # listLabel = tk.Label(self.root, textvariable=self.listText)
         actionLabel = tk.Label(labelFrame, textvariable=actionText)
@@ -240,11 +245,14 @@ class GUI_Driver:
         bubbleButton.pack(side=LEFT, padx = 2, pady = 10)
         selectionButton.pack(side=LEFT, padx = 2, pady = 10)
         insertionButton.pack(side=LEFT, padx = 2, pady = 10)
+
         nLogNText.pack(side=LEFT, padx = 0, pady = 10)
         mergeButton.pack(side=LEFT, padx = 2, pady = 10)
         quickButton.pack(side=LEFT, padx = 2, pady = 10)
-        radixButton.pack(side=LEFT, padx = 2, pady = 10)
         heapButton.pack(side=LEFT, padx = 2, pady = 10)
+
+        oddSortText.pack(side=LEFT, padx = 0, pady = 10)
+        radixButton.pack(side=LEFT, padx = 2, pady = 10)
 
         correctLabel.pack(side=TOP, padx = 2, pady = 0)
         actionLabel.pack(side=BOTTOM, padx = 2, pady = 0)
