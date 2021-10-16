@@ -25,7 +25,7 @@ class GUI_Driver:
         self.root.geometry("1800x450")
         self.list = createList(100) #create a list --SHOULD UPDATE SO USER CAN SPECIFY HOW MANY LIST ITEMS WITH AN INPUT FIELD OR SLIDER--
         self.myPlot = myPlot()
-        # self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
+        self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
         self.currentSort = AbstractSort 
         self.currentSort.kill = True 
 
@@ -80,13 +80,11 @@ class GUI_Driver:
                 correctText.set("Not Sorted Correctly :(")
             actionText.set("Idle...") 
 
-        def exitClick():
+        def exitClick(): #button that is used to close GUI
             stopClick()
             actionText.set("Exiting...")
             plt.close('all')
             self.root.destroy()
-            print('everything should be closed now...')
-
 
         def bubbleClick(): #button that is used to start a bubblesort
             stopClick()
@@ -183,7 +181,7 @@ class GUI_Driver:
         actionText.set("Idle...")
 
         correctText = tk.StringVar() 
-        correctText.set("")
+        correctText.set("Sorted Correctly!")
 
         # self.listText.set(self.list) 
 
