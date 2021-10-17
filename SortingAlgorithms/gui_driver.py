@@ -228,7 +228,7 @@ class GUI_Driver:
         selectionButton = tk.Button(nSquaredFrame, text="Selection", command=selectionClick)
         insertionButton = tk.Button(nSquaredFrame, text="Insertion", command=insertionClick)
 
-        nLogNText = tk.Label(nLogNFrame, text="O(nLog(n)) Sorting Algorithms:")
+        nLogNText = tk.Label(nLogNFrame, text="O(n log(n)) Sorting Algorithms:")
         mergeButton = tk.Button(nLogNFrame, text="Merge", command=mergeClick)
         quickButton = tk.Button(nLogNFrame, text="Quick", command=quickClick)
         heapButton = tk.Button(nLogNFrame, text="Heap", command=heapClick)
