@@ -92,6 +92,7 @@ class GUI_Driver:
             actionText.set("Bubble Sorting...") 
             if not isinstance(self.currentSort, BubbleSort): #if the current sort is not a bubble sort then create a new bubblesort object
                 self.currentSort = BubbleSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000) #set the current sort timestep. Semi-redundant but is useful if the user wants to change the speed of the current sort.
             if not correctnessCheck(self.list): #if it fails the correctnessCheck... (is useful so the user won't try sorting a sorted list. Could be removed if it is something that I would like the user to be able to do i.e. best case scenario sorts)
                 self.currentSort.kill=False 
@@ -104,6 +105,7 @@ class GUI_Driver:
             actionText.set("Selection Sorting...") 
             if not isinstance(self.currentSort, SelectionSort):
                 self.currentSort = SelectionSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000)
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
@@ -116,6 +118,7 @@ class GUI_Driver:
             actionText.set("Insertion Sorting...")
             if not isinstance(self.currentSort, InsertionSort): 
                 self.currentSort = InsertionSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
@@ -129,6 +132,7 @@ class GUI_Driver:
             actionText.set("Merge Sorting...") 
             if not isinstance(self.currentSort, MergeSort): 
                 self.currentSort = MergeSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             else:
                 self.currentSort.dummyList = self.list
             self.currentSort.timeStep = speedSlider.get() / float(1000)
@@ -144,6 +148,7 @@ class GUI_Driver:
             actionText.set("Quick Sorting...") 
             if not isinstance(self.currentSort, QuickSort):
                 self.currentSort = QuickSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
@@ -156,6 +161,7 @@ class GUI_Driver:
             actionText.set("Radix Sorting...") 
             if not isinstance(self.currentSort, RadixSort): 
                 self.currentSort = RadixSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list): 
                 self.currentSort.kill=False
@@ -168,6 +174,7 @@ class GUI_Driver:
             actionText.set("Heap Sorting...") 
             if not isinstance(self.currentSort, HeapSort): 
                 self.currentSort = HeapSort(self, speedSlider.get() / float(1000), self.list, self.myPlot)
+                self.timeComplexity.set(self.currentSort.getTimeComplexity())
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list): 
                 self.currentSort.kill=False

@@ -24,15 +24,13 @@ class AbstractSort:
         if len(self.l) <= 150:
             # self.gui.listText.set(self.l)
             sleep(self.timeStep)
-        # if not isinstance(self.gui.currentSort, self):
-        timeComplexity = self.getTimeComplexity()
-        timeComplexityString = 'Worst Case: {} Average Case: {} Best Case: {}'.format(timeComplexity[0], timeComplexity[1], timeComplexity[2])
-        if self.specialCaseInfo:
-            timeComplexityString += '\nAdditional Info: {}'.format(timeComplexity[3])
-        self.gui.timeComplexity.set(timeComplexityString)
         self.gui.root.update()
 
     def getTimeComplexity(self):
-        return [self.worstCase, self.avgCase, self.bestCase, self.specialCaseInfo]
+        timeComplexity = [self.worstCase, self.avgCase, self.bestCase, self.specialCaseInfo]
+        timeComplexityString = 'Worst Case: {} Average Case: {} Best Case: {}'.format(timeComplexity[0], timeComplexity[1], timeComplexity[2])
+        if self.specialCaseInfo:
+            timeComplexityString += '\nAdditional Info: {}'.format(timeComplexity[3])
+        return timeComplexityString
         
         
