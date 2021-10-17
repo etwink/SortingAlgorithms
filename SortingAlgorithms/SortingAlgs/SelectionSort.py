@@ -6,6 +6,9 @@ from time import sleep
 class SelectionSort(AbstractSort):
     def __init__(self, gui, timeStep, l, myPlot):
         super().__init__(gui, timeStep, l, myPlot)
+        self.worstCase = 'O(n^2)'
+        self.avgCase = 'O(n^2)'
+        self.bestCase = 'O(n^2)'
         self.i = 0
 
     def selectionSort(self):

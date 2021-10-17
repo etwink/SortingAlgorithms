@@ -6,6 +6,10 @@ from time import sleep
 class RadixSort(AbstractSort):
     def __init__(self, gui, timeStep, l, myPlot):
         super().__init__(gui, timeStep, l, myPlot)
+        self.worstCase = 'O(nk)'
+        self.avgCase = 'O(nk)'
+        self.bestCase = 'O(nk)'
+        self.specialCaseInfo = 'Where n is the size of the list and k is the maximum number of digits (in this case, 10)'
 
     def countingSort(self, l, exp1):
         n = len(l)

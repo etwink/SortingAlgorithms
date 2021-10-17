@@ -6,6 +6,9 @@ from time import sleep
 class MergeSort(AbstractSort):
     def __init__(self, gui, timeStep, l, myPlot):
         super().__init__(gui, timeStep, l, myPlot)
+        self.worstCase = 'O(n log(n))'
+        self.avgCase = 'O(n log(n))'
+        self.bestCase = 'O(n log(n))'
         self.dummyList = l.copy()
 
     def updateGUI(self, l, low, high):

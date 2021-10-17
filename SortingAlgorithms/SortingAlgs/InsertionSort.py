@@ -7,6 +7,9 @@ class InsertionSort(AbstractSort):
     def __init__(self, gui, timeStep, l, myPlot):
         super().__init__(gui, timeStep, l, myPlot)
         self.i = 1
+        self.worstCase = 'O(n^2)'
+        self.avgCase = 'O(n^2)'
+        self.bestCase = 'O(n)'
 
     def insertionSort(self):
         for i  in range(1, len(self.l)):

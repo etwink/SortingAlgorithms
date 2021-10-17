@@ -28,6 +28,7 @@ class GUI_Driver:
         self.listText = tk.StringVar() #create a list text variable to show user the current list. --SHOULD UPDATE WHERE IF LIST LENGTH > ABOUT 200 THEN DISPLAY START AND STOP TIMES INSTEAD AND MAYBE USE A MATPLOT TO SHOW LIST INSTEAD--
         self.currentSort = AbstractSort 
         self.currentSort.kill = True 
+        self.timeComplexity = tk.StringVar()
 
     def gui_setUp(self):
 
@@ -191,6 +192,7 @@ class GUI_Driver:
         nSquaredFrame = tk.Frame(self.root)
         nLogNFrame = tk.Frame(self.root)
         oddSortFrame = tk.Frame(self.root)
+        timeComplexityFrame = tk.Frame(self.root)
         labelFrame = tk.Frame(self.root)
         exitFrame = tk.Frame(self.root)
 
@@ -200,6 +202,7 @@ class GUI_Driver:
         nSquaredFrame.pack()
         nLogNFrame.pack()
         oddSortFrame.pack()
+        timeComplexityFrame.pack()
         labelFrame.pack()
         exitFrame.pack()
         
@@ -225,6 +228,8 @@ class GUI_Driver:
 
         oddSortText = tk.Label(oddSortFrame, text="Odd Sorting Algorithms:")
         radixButton = tk.Button(oddSortFrame, text="Radix", command=radixClick)
+
+        timeComplexityText = tk.Label(timeComplexityFrame, textvariable=self.timeComplexity)
 
         # listLabel = tk.Label(self.root, textvariable=self.listText)
         actionLabel = tk.Label(labelFrame, textvariable=actionText)
@@ -253,6 +258,8 @@ class GUI_Driver:
 
         oddSortText.pack(side=LEFT, padx = 0, pady = 10)
         radixButton.pack(side=LEFT, padx = 2, pady = 10)
+
+        timeComplexityText.pack(pady = 10)
 
         correctLabel.pack(side=TOP, padx = 2, pady = 0)
         actionLabel.pack(side=BOTTOM, padx = 2, pady = 0)

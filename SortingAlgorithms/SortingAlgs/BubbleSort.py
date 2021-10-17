@@ -8,6 +8,9 @@ class BubbleSort(AbstractSort):
     def __init__(self, gui, timeStep, l, myPlot):
         super().__init__(gui, timeStep, l, myPlot)
         self.i = 0
+        self.worstCase = 'O(n^2)'
+        self.avgCase = 'O(n^2)'
+        self.bestCase = 'O(n)'
 
     def bubbleSort(self):
         for i in range(0, len(self.l)):
