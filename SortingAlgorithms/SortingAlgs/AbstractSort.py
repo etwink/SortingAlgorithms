@@ -24,6 +24,7 @@ class AbstractSort:
         if len(self.l) <= 150:
             # self.gui.listText.set(self.l)
             sleep(self.timeStep)
+        self.gui.timeToSort.set('Time to sort: {:.3f} seconds'.format(time.time()-self.gui.start))
         self.gui.root.update()
 
     def getTimeComplexity(self):

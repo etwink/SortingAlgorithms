@@ -16,6 +16,7 @@ from HelperFunctions.plotterHelper import myPlot
 import tkinter as tk
 from tkinter.constants import BOTTOM, HORIZONTAL, LEFT, TOP
 import matplotlib.pyplot as plt
+import time
 
 
 class GUI_Driver:
@@ -29,6 +30,9 @@ class GUI_Driver:
         self.currentSort = AbstractSort 
         self.currentSort.kill = True 
         self.timeComplexity = tk.StringVar()
+        self.start = time.time()
+        self.stop = time.time()
+        self.timeToSort = tk.StringVar()
 
     def gui_setUp(self):
 
@@ -96,7 +100,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000) #set the current sort timestep. Semi-redundant but is useful if the user wants to change the speed of the current sort.
             if not correctnessCheck(self.list): #if it fails the correctnessCheck... (is useful so the user won't try sorting a sorted list. Could be removed if it is something that I would like the user to be able to do i.e. best case scenario sorts)
                 self.currentSort.kill=False 
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.bubbleSort() 
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -109,7 +117,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000)
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.selectionSort()
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -122,7 +134,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.insertionSort()
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -138,8 +154,12 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000)
             if not correctnessCheck(self.list): 
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.mergeSort(self.list, 0, len(self.list))
                 self.myPlot.update(self.list)
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -152,7 +172,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list):
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.quickSort(0, len(self.list) - 1, self.list)
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...")
 
@@ -165,7 +189,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list): 
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.radixSort(self.list)
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -178,7 +206,11 @@ class GUI_Driver:
             self.currentSort.timeStep = speedSlider.get() / float(1000) 
             if not correctnessCheck(self.list): 
                 self.currentSort.kill=False
+                self.timeToSort.set('Time to sort: ...')
+                self.start = time.time()
                 self.currentSort.heapSort(self.list)
+                self.stop = time.time()
+                self.timeToSort.set('Time to sort: {:.3f} seconds'.format(self.stop-self.start))
             checkClick() 
             actionText.set("Idle...") 
 
@@ -237,6 +269,7 @@ class GUI_Driver:
         radixButton = tk.Button(oddSortFrame, text="Radix", command=radixClick)
 
         timeComplexityText = tk.Label(timeComplexityFrame, textvariable=self.timeComplexity)
+        timeToSortText = tk.Label(timeComplexityFrame, textvariable=self.timeToSort)
 
         # listLabel = tk.Label(self.root, textvariable=self.listText)
         actionLabel = tk.Label(labelFrame, textvariable=actionText)
@@ -266,7 +299,8 @@ class GUI_Driver:
         oddSortText.pack(side=LEFT, padx = 0, pady = 10)
         radixButton.pack(side=LEFT, padx = 2, pady = 10)
 
-        timeComplexityText.pack(pady = 10)
+        timeComplexityText.pack(side=TOP, pady = (10,0))
+        timeToSortText.pack(side=BOTTOM, pady=(0,10))
 
         correctLabel.pack(side=TOP, padx = 2, pady = 0)
         actionLabel.pack(side=BOTTOM, padx = 2, pady = 0)
