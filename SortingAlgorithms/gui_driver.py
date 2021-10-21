@@ -40,6 +40,8 @@ class GUI_Driver:
         def shuffleClick(): #button that is used to shuffle the list
             stopClick()
             actionText.set("Shuffling...") 
+            if listSizeEntry.get() != len(self.list):
+                changeListClick()
             ListShuffle(self.list) #shuffling the list
             # self.listText.set(self.list) 
             self.myPlot.update(self.list)

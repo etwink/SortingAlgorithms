@@ -1,6 +1,7 @@
 from SortingAlgs.AbstractSort import AbstractSort
 
 import tkinter as tk
+import time
 from time import sleep
 
 class MergeSort(AbstractSort):
@@ -21,6 +22,7 @@ class MergeSort(AbstractSort):
         if len(self.l) <= 150:
             self.gui.listText.set(dummyText)
             sleep(self.timeStep)
+        self.gui.timeToSort.set('Time to sort: {:.3f} seconds'.format(time.time()-self.gui.start))
         self.gui.root.update()
         self.myPlot.update(self.dummyList)
         
